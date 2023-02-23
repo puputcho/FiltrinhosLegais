@@ -1,9 +1,11 @@
+x=0, y=0;
+let img;
 function preload(){
-    
+    img = loadImage('m.png');
 }
 function setup() {
  canvas = createCanvas(300,300);
- canvas.center();   
+ canvas.position(550,300);   
  webcam = createCapture(VIDEO);
  webcam.size(300,300);
  webcam.hide() ;
@@ -19,11 +21,8 @@ function draw() {
  function gotPoses(results) {
     if (results.lenght > 0) {
         console.log(results);
-        console.log('noseX = ' + results[0].pose.leftEye.x);
-        console.log('noseY = ' + results[0].pose.leftEye.y);
-
-    }
-    else{
-        console.error('Algo de errado não está certo...');
+        x = results[0].pose.nose.x;
+        y = results[0].pose.nose.y;
+        image(img, x, y)
     }
  }
